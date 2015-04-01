@@ -1,0 +1,24 @@
+{
+  "name": "impressview-web-service",
+  "version": "1.0.0",
+  "description": "Impressview backend",
+  "main": "service.js",
+  "dependencies": {
+    "mongoose": "^4.0.1",
+    "promise": "^6.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/impressview/web-service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/impressview/web-service/issues"
+  },
+  "homepage": "https://github.com/impressview/web-service"
+}

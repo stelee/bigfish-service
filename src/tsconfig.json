@@ -1,0 +1,35 @@
+{
+    "version": "1.4.1",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "outDir": "../build"
+    },
+    "filesGlob": [
+        "./**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./handlers/bonjour.ts",
+        "./handlers/index.ts",
+        "./handlers/mongoDBProxy.ts",
+        "./libs/baseHandler.ts",
+        "./libs/baseMiddleWare.ts",
+        "./libs/middleWareProcessor.ts",
+        "./libs/mongodbManager.ts",
+        "./libs/sequenceExecutor.ts",
+        "./middlewares/dummy.ts",
+        "./router/handlerDef.ts",
+        "./router/router.ts",
+        "./service.ts",
+        "./typings/es6-promise/es6-promise.d.ts",
+        "./typings/mongoose/mongoose.d.ts",
+        "./typings/node/node.d.ts",
+        "./typings/tsd.d.ts",
+        "./utils/log.ts"
+    ]
+}
