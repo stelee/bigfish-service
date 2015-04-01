@@ -7,7 +7,12 @@
     "mongoose": "^4.0.1",
     "promise": "^6.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-ts-clean": "^0.2.0",
+    "grunt-typescript": "^0.6.1",
+    "typescript": "^1.4.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

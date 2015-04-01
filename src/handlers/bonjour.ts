@@ -1,6 +1,6 @@
 import handler = require("../libs/baseHandler");
 
-class Bonjour extends handler.BaseHandler
+export class Bonjour extends handler.BaseHandler
 {
   public get(str)
   {

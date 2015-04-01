@@ -1,6 +1,6 @@
 import handler = require("../libs/baseHandler");
 
-class Index extends handler.BaseHandler{
+export class Index extends handler.BaseHandler{
 
   public get(){
     this.writeToJSON("hello,world")

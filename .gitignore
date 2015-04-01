@@ -26,3 +26,5 @@ node_modules
 
 #tsd folder
 src/typings
+
+.tscache

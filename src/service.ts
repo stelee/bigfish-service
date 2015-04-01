@@ -1,6 +1,3 @@
-/// <reference path='typings/node/node.d.ts' />
-/// <reference path='typings/mongoose/mongoose.d.ts' />
-
 type TRouterTable={[id:string]:string};
 
 import mwp=require("./libs/middleWareProcessor");
