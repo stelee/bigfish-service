@@ -25,22 +25,28 @@ module.exports = function (grunt) {
                 outDir: outDir,
             },
         },
-        ts_clean: {
+        clean: {
             build:{
-                options: {
-                // set to true to print files 
-                verbose: true
-                },
-                src: [outDir+'/**/*'],
-                dot: true
+                src: 'build/**/*',
             }
+        },
+        copy:{
+          config:{
+            expand: true,
+            cwd: srcDir + "/config/",
+            src: "*",
+            dest: outDir + "/config/"
+          }
         }
     });
 
     grunt.loadNpmTasks('grunt-ts');
     grunt.loadNpmTasks('grunt-dts-bundle');
     grunt.loadNpmTasks('grunt-ts-clean');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.registerTask('default', ['ts:dev']);
-    grunt.registerTask('clean',['ts_clean:build']);
-    grunt.registerTask('build', ['ts:build']);
+    grunt.registerTask('cleanbuild',['clean:build']);
+    grunt.registerTask('build', ['ts:build','copy:config']);
+    grunt.registerTask('rebuild', ['clean:build','ts:build','copy:config']);
 };

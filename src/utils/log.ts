@@ -23,4 +23,8 @@ export class Logger
     {
       console.log("WARNING:"+val);
     }
+    public error(val:any)
+    {
+      console.log("ERROR:"+val);
+    }
   };

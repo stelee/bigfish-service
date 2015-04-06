@@ -1,7 +1,12 @@
+/// <reference path='typings/node/node.d.ts' />
+/// <reference path='typings/mongoose/mongoose.d.ts' />
+
 type TRouterTable={[id:string]:string};
 
 import mwp=require("./libs/middleWareProcessor");
 import mw=require("./middlewares/dummy");
+
+var merge=require("merge");//no d.ts supported
 
 module Main{
 
@@ -13,17 +18,33 @@ module Main{
     port:Number;
     listener:String;
     routerTable:TRouterTable;
-    constructor(listener:String="0.0.0.0",port:Number=9000,routerTable:TRouterTable={}){
-      this.listener=listener;
-      this.port =port;
-      this.routerTable=routerTable;
+    appConfig:any;
+    constructor(configFilePath:string){
+      var config=require(configFilePath+".json");
+      var profile=process.argv[2]  //a simple profile check
+      if(!!profile){
+        config=merge.recursive(true,config,require(configFilePath+"_"+profile+".json"));
+      }
+      this.listener=config["listener"]||"0.0.0.0";
+      this.port =config["port"]||9000;
+      this.routerTable=config["router_table"] || {};
+      this.appConfig=config;
     }
     public configRouterTable(routerTable:TRouterTable){
       this.routerTable=routerTable;
     }
   }
-  export class Main{
+  export class App{
+    config:Config;
+    private static instance:App=null;
+    public static  getInstance():App{
+      if(App.instance === null){
+        App.instance = new App();
+      }
+      return App.instance;
+    }
     public run(config:Config){
+      this.config=config;
       logger.info("start the service at "+config.listener+" : "+config.port);
       router.config(config.routerTable);
       var middlewareProcessor=mwp.MiddleWareProcessor.getInstance();
@@ -49,12 +70,5 @@ module Main{
   }
 }
 
-var main=new Main.Main();
-//config start
-var config=new Main.Config();
-config.configRouterTable({
-  "/": "index",
-  "/hello/(\\w*)" : "bonjour"
-})
-//config end
-main.run(config);
+
+Main.App.getInstance().run(new Main.Config("./config/config"));

@@ -19,6 +19,7 @@
         "./handlers/mongoDBProxy.ts",
         "./libs/baseHandler.ts",
         "./libs/baseMiddleWare.ts",
+        "./libs/errorMsg.ts",
         "./libs/middleWareProcessor.ts",
         "./libs/mongodbManager.ts",
         "./libs/sequenceExecutor.ts",
@@ -30,6 +31,8 @@
         "./typings/mongoose/mongoose.d.ts",
         "./typings/node/node.d.ts",
         "./typings/tsd.d.ts",
-        "./utils/log.ts"
+        "./utils/log.ts",
+        "./utils/null.ts",
+        "./utils/walkpath.ts"
     ]
 }

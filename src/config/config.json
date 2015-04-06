@@ -1,0 +1,15 @@
+{
+  "listener" : "0.0.0.0",
+  "port" : "9000",
+  "router_table" :
+  {
+    "/": "index",
+    "/hello/(\\w*)" : "bonjour"
+  },
+  "mongo_db":
+  {
+    "hostname" : "127.0.0.1",
+    "port" : "12017",
+    "dbname" : "default"
+  }
+}
