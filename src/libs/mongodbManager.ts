@@ -1,5 +1,7 @@
 import mongoose=require("mongoose");
 import l=require("../utils/log");
+import w=require("../utils/walkpath");
+import n=require("../utils/null");
 
 var logger=l.Logger.getInstance();
 
@@ -45,11 +47,130 @@ class MongoDBManager{
 
 
   //private
-  private limit(mQuery,val:number){
+  private buildQuery(query,test=[],dryOptionFlag:boolean=false):[{},{}]{
+    var q=w.path(query,"q");
+    if(q===null){
+      q={};
+    }else{
+      q=JSON.parse(q);
+    }
+    var options={};
+    w.walk(q,(val)=>{
+      var match=val.match(/^\/(.+)\/$/);
+      if(match === null){
+        return val;
+      }else{
+        return new RegExp(match[1]);//the query will support the regex
+      }
+    });
+    //build the option
+    for(var prop in query){
+      var val=query[prop];
+      if(prop === "q"){
+        continue;
+      }
+      var match=val.match(/^\/(.+)\/$/);
+      if(match === null){
+        if(test.indexOf(prop)>=0){
+          var realprop;
+          if(!!dryOptionFlag){
+            realprop=prop.replace(/^_/,"");//remove the "_" prefix
+          }else{
+            realprop = prop;
+          }
+          options[realprop]=val;
+        }else{
+          try{
+            q[prop]=JSON.parse(val);
+          }catch(e){
+            q[prop]=val;
+          }
+        }
+      }else{
+        val=new RegExp(match[1]);
+        q[prop]=val;
+      }
+    }
+    return [q,options];
+  }
+
+  public update(Model,query,data,callBack:Function,onError:Function)
+  {
+    try
+    {
+      var queryoption=this.buildQuery(query,[
+      "_safe"
+      ,"_upsert"
+      ,"_multi"
+      ,"_strict"
+      ,"_overwrite"
+      ],true);
+      query=queryoption[0];
+      var options=queryoption[1];
+      options["multi"] = options["multi"] || true;//reset the default value  of the options
+      Model.update(query,data,options,(error,data)=>{
+        if(!!error)
+          onError(error);
+        else
+          callBack(data);
+      });
+    }catch(e)
+    {
+      if(!!onError) onError(e);
+      console.error(e);
+    }
+  }
+
+  public delete(Model,query,callBack:Function,onError:Function)
+  {
+    if(n.isEmpty(query))
+    {
+      onError("Can't delete all by emnpty parameters");
+      return;
+    }
+    var queryoption=this.buildQuery(query);
+    query=queryoption[0];
+    var options=queryoption[1];
+    try{
+      Model.remove(query,(error,data)=>{
+        if(!!error)
+          onError(error);
+        else
+          callBack(data);
+      });
+    }catch(e){
+      if(!!onError) onError(e);
+      console.error(e);
+    }
+  }
+  public query(Model,query,callBack:Function,onError:Function)
+  {
+    if(n.isEmpty(query))
+    {
+      Model.find().exec(callBack);
+      return;
+    }
+    var queryoption=this.buildQuery(query,["_limit","_sort","_select"]);
+    query=queryoption[0];
+    var options=queryoption[1];
+    var mQuery=Model.find(query);
+    for(var prop in options)
+    {
+      this[prop].call(this,mQuery,options[prop]);
+    }
+    mQuery.exec(callBack);
+  }
+
+
+
+  private _limit(mQuery,val:number){
     mQuery.limit(val);
   }
-  private sort(mQuery,val){
+  private _sort(mQuery,val){
     mQuery.sort(val);
+  }
+  private  _select(mQuery,val){
+    mQuery.select(val);
   }
   private getConnectionString():string{
     return 'mongodb://'+ this.hostname + ':' + this.port + '/' + this.dbName

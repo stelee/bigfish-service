@@ -38,7 +38,7 @@ export function setValue(target,path,value):boolean{
   return true;
 }
 
-export function path(target,path,value){
+export function path(target,path,value=undefined){
   if('undefined' == typeof(value)){
     return getValue(target,path);
   }else{

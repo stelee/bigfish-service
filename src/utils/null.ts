@@ -18,11 +18,11 @@ export function isEmpty(obj)
   }
   return isNull(obj);
 }
-export function isNotNull=function(obj)
+export function isNotNull(obj)
 {
     return !isNull(obj);
 }
-export function isNotEmpty=function(obj)
+export function isNotEmpty(obj)
 {
     return !isEmpty(obj);
 }

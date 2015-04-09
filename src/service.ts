@@ -49,10 +49,6 @@ module Main{
       router.config(config.routerTable);
       var middlewareProcessor=mwp.MiddleWareProcessor.getInstance();
       http.createServer((req,res)=>{
-        //TODO:
-        //you can add middlewhere here
-        //should use promise to process the req, res
-        //because middleware may be running asynchronized
         logger.debug("receive the request");
         middlewareProcessor.register(new mw.Dummy());
         middlewareProcessor.runAsPromise().then(function(data){
