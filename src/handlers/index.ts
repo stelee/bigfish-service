@@ -3,7 +3,7 @@ import handler = require("../libs/baseHandler");
 export class Index extends handler.BaseHandler{
 
   public get(){
-    this.writeToJSON("hello,world")
+    this.out("hello,world")
   }
 }
 export function getInstance()

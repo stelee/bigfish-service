@@ -4,7 +4,7 @@ export class Bonjour extends handler.BaseHandler
 {
   public get(str)
   {
-    this.writeToJSON({message : str});
+    this.out({message : str});
   }
 }
 

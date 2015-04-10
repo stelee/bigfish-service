@@ -10,7 +10,7 @@ export class BaseHandler
   constructor(){
 
   }
-  public writeToJSON(data)
+  public out(data)
   {
     this.response.end(JSON.stringify(data));
   }

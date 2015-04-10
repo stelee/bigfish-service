@@ -8,7 +8,7 @@ import mw=require("./middlewares/dummy");
 
 var merge=require("merge");//no d.ts supported
 
-module Main{
+export module Main{
 
   var http=require("http"),
     logger=require("./utils/log").Logger.getInstance(),

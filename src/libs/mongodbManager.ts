@@ -6,12 +6,22 @@ import n=require("../utils/null");
 var logger=l.Logger.getInstance();
 
 ///<reference path='../typings/mongoose/mongoose.d.ts' />
-class MongoDBManager{
+export class MongoDBManager{
   hostname:string;
   port:string;
   dbName:string;
   mongoose: mongoose.Mongoose;
   connection:mongoose.Connection;
+
+  private static  instance:MongoDBManager=null;
+
+  public static getInstance(config:{[id:string]:string}=undefined):MongoDBManager
+  {
+    if(MongoDBManager.instance === null){
+      MongoDBManager.instance=new MongoDBManager(config);
+    }
+    return MongoDBManager.instance;
+  }
 
   constructor(config:{[id:string]:string}={
     "hostname" : "localhost"

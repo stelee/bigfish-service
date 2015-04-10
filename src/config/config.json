@@ -4,12 +4,13 @@
   "router_table" :
   {
     "/": "index",
-    "/hello/(\\w*)" : "bonjour"
+    "/hello/(\\w*)" : "bonjour",
+    "/mongo/(.*)" : "mongoDBProxy"
   },
   "mongo_db":
   {
     "hostname" : "127.0.0.1",
-    "port" : "12017",
+    "port" : "27017",
     "dbname" : "default"
   }
 }
