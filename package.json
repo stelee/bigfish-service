@@ -4,6 +4,7 @@
   "description": "Impressview backend",
   "main": "service.js",
   "dependencies": {
+    "lingo": "0.0.5",
     "merge": "^1.2.0",
     "mongoose": "^4.0.1",
     "promise": "^6.1.0"

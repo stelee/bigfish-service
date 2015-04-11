@@ -60,6 +60,7 @@ export class Router{
           }catch(ex)
           {
             console.error("method:" + methodName + " is unable to process");
+            console.error(ex);
             reject({error:"method:" + methodName + " is unable to process"});
           }
 

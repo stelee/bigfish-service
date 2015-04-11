@@ -153,7 +153,7 @@ export class MongoDBManager{
       console.error(e);
     }
   }
-  public query(Model,query,callBack:Function,onError:Function)
+  public query(Model,query,callBack:Function)
   {
     if(n.isEmpty(query))
     {

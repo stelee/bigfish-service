@@ -24,6 +24,7 @@
         "./libs/mongodbManager.ts",
         "./libs/sequenceExecutor.ts",
         "./middlewares/dummy.ts",
+        "./models/user.ts",
         "./router/handlerDef.ts",
         "./router/router.ts",
         "./service.ts",
