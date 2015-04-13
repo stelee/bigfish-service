@@ -19,6 +19,7 @@
         "./handlers/mongoDBProxy.ts",
         "./libs/baseHandler.ts",
         "./libs/baseMiddleWare.ts",
+        "./libs/baseModel.ts",
         "./libs/errorMsg.ts",
         "./libs/middleWareProcessor.ts",
         "./libs/mongodbManager.ts",
