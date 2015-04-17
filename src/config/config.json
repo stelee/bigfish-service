@@ -5,12 +5,17 @@
   {
     "/": "index",
     "/hello/(\\w*)" : "bonjour",
-    "/mongo/(.*)" : "mongoDBProxy"
+    "/mongo/(.*)" : "mongoDBProxy",
+    "/public/(.*)"		: "public"
   },
   "mongo_db":
   {
     "hostname" : "127.0.0.1",
     "port" : "27017",
     "dbname" : "default"
+  },
+  "www" :
+  {
+    "path" : "../web-client"
   }
 }

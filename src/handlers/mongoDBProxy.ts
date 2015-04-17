@@ -11,7 +11,7 @@ export class MongoDBProxy extends handler.BaseHandler{
   constructor()
   {
     super();
-    this.mongodbManager=m.MongoDBManager.getInstance(main.Main.App.getInstance().config["mongo"]);
+    this.mongodbManager=m.MongoDBManager.getInstance(main.Main.App.getInstance().config["appConfig"]["mongo"]);
     this.mongodbManager.reconnect();
   }
   public get(params:string = null)
