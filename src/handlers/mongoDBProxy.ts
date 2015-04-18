@@ -11,7 +11,9 @@ export class MongoDBProxy extends handler.BaseHandler{
   constructor()
   {
     super();
-    this.mongodbManager=m.MongoDBManager.getInstance(main.Main.App.getInstance().config["appConfig"]["mongo"]);
+    logger.debug("mongo db configuration");
+    logger.debug(JSON.stringify(main.Main.App.getInstance().config["appConfig"]["mongo_db"]));
+    this.mongodbManager=m.MongoDBManager.getInstance(main.Main.App.getInstance().config["appConfig"]["mongo_db"]);
     this.mongodbManager.reconnect();
   }
   public get(params:string = null)
@@ -228,7 +230,7 @@ export class MongoDBProxy extends handler.BaseHandler{
       {
         if(err)
         {
-          that.error("-15");
+          that.error("-15",err);
           return;
         }
         that.out(doc);
@@ -284,12 +286,13 @@ export class MongoDBProxy extends handler.BaseHandler{
       message : errorCode.MSG["0"]
     })
   }
-  private error(errorcode)
+  private error(errorcode,err=null)
   {
     this.out({
       success: false,
       code : Number(errorcode),
-      message : errorCode.MSG[errorcode]
+      message : errorCode.MSG[errorcode],
+      err:err
     })
   }
 }

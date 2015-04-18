@@ -50,7 +50,7 @@ export module Main{
       var middlewareProcessor=mwp.MiddleWareProcessor.getInstance();
       http.createServer((req,res)=>{
         logger.debug("receive the request");
-        middlewareProcessor.register(new mw.Dummy());
+        //middlewareProcessor.register(new mw.Dummy());
         middlewareProcessor.runAsPromise().then(function(data){
           logger.debug("return value from middleware:" + data);
           router.process(req,res,data);
