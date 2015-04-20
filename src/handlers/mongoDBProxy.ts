@@ -23,7 +23,6 @@ export class MongoDBProxy extends handler.BaseHandler{
       this.ping();
       return;
     }
-    debugger;
     var args:string[]=params.split("/");
     var modelName:string=args[0];
     args=args.slice(1);
@@ -32,6 +31,7 @@ export class MongoDBProxy extends handler.BaseHandler{
       this.getById(modelName,args[0]);
     }else
     {
+      debugger;
       this.find(en.singularize(modelName),this.getQuery());
     }
   }

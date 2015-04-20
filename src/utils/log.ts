@@ -27,4 +27,8 @@ export class Logger
     {
       console.log("ERROR:"+val);
     }
+    public dump(val:any)
+    {
+      console.log("DUMP:"+JSON.stringify(val));
+    }
   };
