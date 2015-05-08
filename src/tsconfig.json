@@ -27,6 +27,7 @@
         "./middlewares/dummy.ts",
         "./models/menu.ts",
         "./models/profile.ts",
+        "./models/subscription.ts",
         "./models/user.ts",
         "./router/handlerDef.ts",
         "./router/router.ts",
