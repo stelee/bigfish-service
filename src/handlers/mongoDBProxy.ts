@@ -31,7 +31,6 @@ export class MongoDBProxy extends handler.BaseHandler{
       this.getById(modelName,args[0]);
     }else
     {
-      debugger;
       this.find(en.singularize(modelName),this.getQuery());
     }
   }
@@ -97,7 +96,7 @@ export class MongoDBProxy extends handler.BaseHandler{
         logger.error(err);
         return;
       }
-      this.out(model);
+      this.out(this.filter(model,modelName));
     })
   }
   private loadModel(modelName:string)
@@ -126,10 +125,23 @@ export class MongoDBProxy extends handler.BaseHandler{
         logger.error(err);
         return;
       }
-      this.out(models);
+      this.out(models.map((el)=>{
+        return this.filter(el,modelName)
+      }));
     })
   }
 
+  private filter(el,modelName:String)
+  {
+    if(modelName == "profile")
+    {
+      el["payment"]["cardNumber"]="************";
+    }else if(modelName == "user")
+    {
+      el["password"]="******"
+    }
+    return el;
+  }
   private updateById(modelName,objectId)
   {
     var Model=this.loadModel(modelName);

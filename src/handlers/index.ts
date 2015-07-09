@@ -3,7 +3,7 @@ import handler = require("../libs/baseHandler");
 export class Index extends handler.BaseHandler{
 
   public get(){
-    this.out("hello,world")
+    this.redirect("/public/app/");
   }
 }
 export function getInstance()
